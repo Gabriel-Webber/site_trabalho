@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vagas - Conecta Libras</title>
+  <!-- Estas páginas ficam na pasta pages/, por isso os caminhos começam com ../ -->
+  <link rel="stylesheet" href="../assets/css/variaveis.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/componentes.css">
+  <link rel="stylesheet" href="../assets/css/responsivo.css">
+</head>
+<!-- data-raiz="../" corrige os links do cabeçalho e do rodapé (montados pelo layout.js).
+     data-exigir="interprete": o layout.js manda para o cadastro quem não for intérprete. -->
+<body data-raiz="../" data-exigir="interprete">
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo principal</a>
+  <!-- Preenchido pelo layout.js -->
+  <header class="cabecalho" id="cabecalho-site"></header>
+
+  <main id="conteudo">
+    <div class="titulo-pagina">
+      <div class="container">
+        <h1>Vagas para intérpretes</h1>
+        <p>Encontre demandas de intérprete de Libras. Filtre por localização, modalidade e especialidade.</p>
+      </div>
+    </div>
+
+    <div class="container secao">
+      <!-- Coluna de filtros fixa (300px) + coluna de resultados (1fr) -->
+      <div class="duas-colunas" style="grid-template-columns: 300px 1fr;">
+        <!-- Filtros (controlados por js/paginas/vagas.js).
+             O select de modalidade e os checkboxes de especialidades são
+             preenchidos pelo JS; aqui ficam só os campos fixos. -->
+        <aside class="cartao painel-filtros" aria-label="Filtros de vagas">
+          <form id="form-filtros" class="formulario">
+            <div class="campo">
+              <label for="filtro-texto">Título ou empresa</label>
+              <input type="search" id="filtro-texto" name="texto" placeholder="Ex.: reuniões">
+            </div>
+            <div class="campo">
+              <label for="filtro-local">Localização</label>
+              <input type="text" id="filtro-local" name="local" placeholder="Ex.: Caxias do Sul">
+            </div>
+            <div class="campo">
+              <label for="filtro-modalidade">Modalidade</label>
+              <select id="filtro-modalidade" name="modalidade">
+                <!-- "Todas" = valor vazio, que o filtro interpreta como "não filtrar" -->
+                <option value="">Todas</option>
+              </select>
+            </div>
+            <fieldset class="campo">
+              <legend>Especialidades de interpretação</legend>
+              <!-- Checkboxes criados por App.Helpers.renderizarCheckboxesEspecialidades -->
+              <div id="filtro-especialidades"></div>
+            </fieldset>
+            <!-- type="button": não envia o formulário, só limpa os campos -->
+            <button type="button" class="botao botao--secundario" id="limpar-filtros">Limpar filtros</button>
+          </form>
+        </aside>
+
+        <!-- Resultados: os cartões são inseridos pelo vagas.js -->
+        <section aria-labelledby="titulo-resultados">
+          <h2 id="titulo-resultados">Resultados</h2>
+          <!-- aria-live: leitores de tela anunciam quando o total muda -->
+          <p id="contador-resultados" aria-live="polite"></p>
+          <div class="grade" id="lista-vagas" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Preenchido pelo layout.js -->
+  <footer class="rodape" id="rodape-site"></footer>
+
+  <!-- Scripts: a ordem importa (dados > utilitários > serviços > componentes > página).
+       layout.js precisa de sessao-servico.js carregado antes dele.
+       cartao-vaga.js é necessário porque é ele que monta os cartões e o modal. -->
+  <script src="../assets/js/dados/vagas-exemplo.js"></script>
+  <script src="../assets/js/utils/armazenamento.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/servicos/sessao-servico.js"></script>
+  <script src="../assets/js/servicos/vagas-servico.js"></script>
+  <script src="../assets/js/servicos/candidatura-servico.js"></script>
+  <script src="../assets/js/servicos/cadastro-servico.js"></script>
+  <script src="../assets/js/componentes/layout.js"></script>
+  <script src="../assets/js/componentes/cartao-vaga.js"></script>
+  <script src="../assets/js/paginas/vagas.js"></script>
+</body>
+</html>

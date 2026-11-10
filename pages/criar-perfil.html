@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Criar perfil - Conecta Libras</title>
+  <meta name="description" content="Crie o perfil do intérprete de Libras ou da empresa/RH para começar a usar a plataforma.">
+  <link rel="stylesheet" href="../assets/css/variaveis.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/componentes.css">
+  <link rel="stylesheet" href="../assets/css/responsivo.css">
+</head>
+<!-- Página pública (sem data-exigir): é o passo de cadastro, antes de entrar no sistema.
+     O tipo vem na URL (?tipo=interprete ou ?tipo=empresa) e o criar-perfil.js
+     mostra a visão correspondente. -->
+<body data-raiz="../">
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo principal</a>
+  <!-- Preenchido pelo layout.js (sem sessão, o menu mostra Início e Entrar) -->
+  <header class="cabecalho" id="cabecalho-site"></header>
+
+  <main id="conteudo">
+    <div class="titulo-pagina">
+      <div class="container">
+        <!-- O criar-perfil.js troca o texto conforme o tipo escolhido -->
+        <h1 id="titulo-cadastro">Criar perfil</h1>
+        <p id="subtitulo-cadastro">Passo 2 de 2: preencha os dados para entrar no sistema.</p>
+      </div>
+    </div>
+
+    <div class="container secao">
+      <!-- ============================================================
+           VISÃO DO INTÉRPRETE
+           ============================================================ -->
+      <div id="visao-interprete" hidden>
+        <div class="duas-colunas" style="grid-template-columns: 2fr 1fr;">
+          <section class="cartao" aria-labelledby="titulo-form-interprete">
+            <h2 id="titulo-form-interprete">Dados do intérprete</h2>
+            <form id="form-cadastro-interprete" class="formulario">
+              <div class="campo">
+                <label for="cad-nome">Nome completo *</label>
+                <input type="text" id="cad-nome" name="nome" required autocomplete="name">
+              </div>
+              <div class="campo">
+                <label for="cad-email">E-mail *</label>
+                <input type="email" id="cad-email" name="email" required autocomplete="email">
+                <p class="campo__ajuda">Se preferir, use um e-mail fictício na demonstração.</p>
+              </div>
+              <div class="campo">
+                <label for="cad-cidade">Cidade</label>
+                <input type="text" id="cad-cidade" name="cidade" placeholder="Ex.: Caxias do Sul - RS">
+              </div>
+              <div class="campo">
+                <label for="cad-formacao">Formação e certificações</label>
+                <textarea id="cad-formacao" name="formacao" placeholder="Ex.: Graduação em Letras-Libras; certificação Prolibras"></textarea>
+              </div>
+              <div class="campo">
+                <label for="cad-experiencia">Experiência</label>
+                <textarea id="cad-experiencia" name="experiencia" placeholder="Onde e em quais situações você já atuou como intérprete"></textarea>
+              </div>
+              <div class="campo">
+                <label for="cad-habilidades">Idiomas e outras habilidades</label>
+                <input type="text" id="cad-habilidades" name="habilidades" placeholder="Ex.: Libras, português, inglês, Libras tátil">
+              </div>
+              <fieldset class="campo">
+                <legend>Especialidades de interpretação</legend>
+                <!-- Checkboxes criados por App.Helpers.renderizarCheckboxesEspecialidades -->
+                <div id="cad-especialidades"></div>
+              </fieldset>
+              <div class="campo">
+                <label for="cad-video">Link do vídeo de apresentação em Libras</label>
+                <input type="url" id="cad-video" name="videoLibras" placeholder="https://...">
+                <p class="campo__ajuda">Opcional. Cole o link de um vídeo em que você se apresenta.</p>
+              </div>
+              <div class="grupo-botoes">
+                <button type="submit" class="botao">Salvar perfil e entrar</button>
+                <a class="botao botao--secundario" href="cadastro.html">Voltar</a>
+              </div>
+            </form>
+          </section>
+
+          <aside>
+            <!-- Espaço reservado para vídeo de apoio em Libras, com transcrição em texto -->
+            <div class="video-libras">
+              <div class="video-libras__tela" role="img" aria-label="Espaço reservado para vídeo em Libras">Vídeo em Libras: como criar seu perfil</div>
+              <details>
+                <summary>Ler transcrição</summary>
+                <p>Preencha nome, e-mail e cidade. Depois conte sua formação, sua experiência e as áreas em que você atua. Ao salvar, você entra no sistema e pode ver as vagas.</p>
+              </details>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           VISÃO DA EMPRESA / RH
+           ============================================================ -->
+      <div id="visao-empresa" hidden>
+        <div class="duas-colunas" style="grid-template-columns: 2fr 1fr;">
+          <section class="cartao" aria-labelledby="titulo-form-empresa">
+            <h2 id="titulo-form-empresa">Dados da empresa ou agência de RH</h2>
+            <form id="form-cadastro-empresa" class="formulario">
+              <div class="campo">
+                <label for="cad-emp-nome">Nome da empresa *</label>
+                <input type="text" id="cad-emp-nome" name="nome" required autocomplete="organization">
+              </div>
+              <div class="campo">
+                <label for="cad-emp-cnpj">CNPJ (fictício)</label>
+                <input type="text" id="cad-emp-cnpj" name="cnpj" placeholder="00.000.000/0000-00">
+              </div>
+              <div class="campo">
+                <label for="cad-emp-cidade">Cidade</label>
+                <input type="text" id="cad-emp-cidade" name="cidade" placeholder="Ex.: Bento Gonçalves - RS">
+              </div>
+              <div class="campo">
+                <label for="cad-emp-descricao">Sobre a empresa</label>
+                <textarea id="cad-emp-descricao" name="descricao"></textarea>
+              </div>
+              <fieldset class="campo">
+                <legend>Áreas em que a empresa precisa de intérpretes</legend>
+                <!-- Checkboxes criados por App.Helpers.renderizarCheckboxesEspecialidades -->
+                <div id="cad-emp-especialidades"></div>
+              </fieldset>
+              <div class="grupo-botoes">
+                <button type="submit" class="botao botao--empresa">Salvar empresa e entrar</button>
+                <a class="botao botao--secundario" href="cadastro.html">Voltar</a>
+              </div>
+            </form>
+          </section>
+
+          <aside>
+            <div class="video-libras">
+              <div class="video-libras__tela" role="img" aria-label="Espaço reservado para vídeo em Libras">Vídeo em Libras: como cadastrar a empresa</div>
+              <details>
+                <summary>Ler transcrição</summary>
+                <p>Informe o nome da empresa, a cidade e as áreas em que vocês precisam de intérpretes. Ao salvar, você entra no sistema e pode publicar vagas.</p>
+              </details>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Preenchido pelo layout.js -->
+  <footer class="rodape" id="rodape-site"></footer>
+
+  <!-- Scripts: a ordem importa (dados > utilitários > serviços > componentes > página).
+       layout.js precisa de sessao-servico.js carregado antes dele. -->
+  <script src="../assets/js/dados/vagas-exemplo.js"></script>
+  <script src="../assets/js/utils/armazenamento.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/servicos/sessao-servico.js"></script>
+  <script src="../assets/js/servicos/cadastro-servico.js"></script>
+  <script src="../assets/js/componentes/layout.js"></script>
+  <script src="../assets/js/paginas/criar-perfil.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+/* ==========================================================
+   responsivo.css
+   Ajustes para tablets e celulares (abordagem "max-width":
+   as regras valem quando a tela é MENOR que o valor indicado).
+   Carregado por último para sobrescrever as regras anteriores.
+   ========================================================== */
+
+/* ---------- Telas até 800px (tablets em pé e celulares) ---------- */
+@media (max-width: 800px) {
+  /* Colunas lado a lado viram uma embaixo da outra. */
+  .heroi__grade,
+  .duas-colunas { grid-template-columns: 1fr; }
+
+  /* Título do banner menor para caber sem quebrar demais. */
+  .heroi h1 { font-size: 1.8rem; }
+
+  /* Filtros deixam de "grudar" no topo em telas pequenas
+     (sticky ocuparia espaço demais na tela). */
+  .painel-filtros { position: static; }
+
+  /* Menu ocupa a largura toda, itens em duas colunas. */
+  .menu { width: 100%; }
+  .menu li { flex: 1 1 45%; }
+  .menu a { text-align: center; }
+
+  /* A pergunta de perfil vira uma opção embaixo da outra. */
+  .opcoes-perfil { grid-template-columns: 1fr; }
+}
+
+/* ---------- Telas até 480px (celulares) ---------- */
+@media (max-width: 480px) {
+  /* Texto um pouco menor para caber mais conteúdo. */
+  :root { --tamanho-base: 1rem; }
+
+  /* Botões ocupam a largura toda: alvo de toque maior e mais fácil. */
+  .botao { width: 100%; text-align: center; }
+  .grupo-botoes { flex-direction: column; }
+}

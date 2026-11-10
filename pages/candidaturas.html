@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Candidaturas - Conecta Libras</title>
+  <link rel="stylesheet" href="../assets/css/variaveis.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/componentes.css">
+  <link rel="stylesheet" href="../assets/css/responsivo.css">
+</head>
+<!-- data-exigir="sessao": exige um perfil escolhido, mas serve aos dois tipos.
+     O candidaturas.js decide qual visão mostrar (intérprete ou empresa). -->
+<body data-raiz="../" data-exigir="sessao">
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo principal</a>
+  <!-- Preenchido pelo layout.js -->
+  <header class="cabecalho" id="cabecalho-site"></header>
+
+  <main id="conteudo">
+    <div class="titulo-pagina">
+      <div class="container">
+        <h1 id="titulo-candidaturas">Minhas candidaturas</h1>
+        <p id="subtitulo-candidaturas">Acompanhe o andamento. Os status são demonstrativos: use o botão para simular a próxima etapa.</p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         VISÃO DO INTÉRPRETE: um cartão por candidatura, com a linha
+         do tempo das etapas e os botões de ação.
+         ============================================================ -->
+    <div class="container secao" id="visao-interprete" hidden>
+      <div class="grade" id="lista-candidaturas"></div>
+    </div>
+
+    <!-- ============================================================
+         VISÃO DA EMPRESA: criação, edição e exclusão das vagas.
+         ============================================================ -->
+    <div class="container secao" id="visao-empresa" hidden>
+      <!-- Aviso mostrado quando a empresa ainda não tem cadastro -->
+      <p id="aviso-sem-empresa" class="erro-campo">Salve os dados da empresa no menu "Perfil da empresa" antes de publicar vagas.</p>
+
+      <!-- Formulário de criação/edição de vaga.
+           O mesmo formulário serve para os dois casos: o candidaturas.js
+           troca o título e o texto do botão conforme o modo. -->
+      <section class="cartao" aria-labelledby="titulo-form-vaga">
+        <h2 id="titulo-form-vaga">Publicar vaga de intérprete</h2>
+        <form id="form-vaga" class="formulario">
+          <!-- Campo escondido com o id da vaga em edição (vazio = criação) -->
+          <input type="hidden" id="vaga-id" name="id">
+          <div class="duas-colunas">
+            <div>
+              <div class="campo">
+                <label for="vaga-titulo">Título da vaga *</label>
+                <input type="text" id="vaga-titulo" name="titulo" required>
+              </div>
+              <div class="campo">
+                <label for="vaga-local">Localização *</label>
+                <input type="text" id="vaga-local" name="localizacao" required placeholder="Ex.: Caxias do Sul - RS">
+              </div>
+              <div class="campo">
+                <label for="vaga-cliente">Empresa cliente (opcional)</label>
+                <input type="text" id="vaga-cliente" name="cliente" placeholder="Para agências de RH: empresa que vai receber o intérprete">
+              </div>
+              <div class="campo">
+                <label for="vaga-modalidade">Modalidade *</label>
+                <select id="vaga-modalidade" name="modalidade" required>
+                  <option value="Presencial">Presencial</option>
+                  <option value="Remoto">Remoto</option>
+                  <option value="Híbrido">Híbrido</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label for="vaga-contrato">Tipo de contrato *</label>
+                <select id="vaga-contrato" name="contrato" required>
+                  <option value="CLT">CLT</option>
+                  <option value="PJ">PJ</option>
+                  <option value="Temporário">Temporário</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <div class="campo">
+                <label for="vaga-descricao">Descrição *</label>
+                <textarea id="vaga-descricao" name="descricao" required></textarea>
+              </div>
+              <fieldset class="campo">
+                <legend>Especialidades de interpretação exigidas</legend>
+                <!-- Checkboxes criados por App.Helpers.renderizarCheckboxesEspecialidades -->
+                <div id="vaga-especialidades"></div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="grupo-botoes">
+            <button type="submit" class="botao botao--empresa" id="botao-salvar-vaga">Publicar vaga</button>
+            <!-- Só aparece no modo edição -->
+            <button type="button" class="botao botao--secundario" id="cancelar-edicao" hidden>Cancelar edição</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Lista das vagas publicadas, preenchida pelo candidaturas.js -->
+      <section style="margin-top: 2.5rem;" aria-labelledby="titulo-publicadas">
+        <h2 id="titulo-publicadas">Minhas vagas publicadas</h2>
+        <div class="grade" id="vagas-da-empresa"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Preenchido pelo layout.js -->
+  <footer class="rodape" id="rodape-site"></footer>
+
+  <!-- Scripts: a ordem importa (dados > utilitários > serviços > componentes > página).
+       Esta página carrega os serviços dos dois perfis porque mostra
+       a visão do intérprete ou a da empresa, conforme a sessão. -->
+  <script src="../assets/js/dados/vagas-exemplo.js"></script>
+  <script src="../assets/js/utils/armazenamento.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/servicos/sessao-servico.js"></script>
+  <script src="../assets/js/servicos/vagas-servico.js"></script>
+  <script src="../assets/js/servicos/candidatura-servico.js"></script>
+  <script src="../assets/js/servicos/cadastro-servico.js"></script>
+  <script src="../assets/js/componentes/layout.js"></script>
+  <script src="../assets/js/componentes/cartao-vaga.js"></script>
+  <script src="../assets/js/paginas/candidaturas.js"></script>
+</body>
+</html>

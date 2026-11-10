@@ -1,0 +1,45 @@
+/* ==========================================================
+   variaveis.css
+   Design tokens (cores, fontes, espaçamentos) do site.
+
+   Tudo que define a identidade visual fica aqui, em variáveis CSS
+   (custom properties) declaradas em ":root", que é o <html>.
+   Como as variáveis são herdadas por todos os elementos, basta
+   alterar um valor neste arquivo para mudar o site inteiro.
+
+   Acessibilidade: as cores abaixo foram escolhidas com contraste
+   mínimo de 4.5:1 entre texto e fundo (WCAG 2.1 AA).
+   ========================================================== */
+
+:root {
+  /* ---------- Cores principais ---------- */
+  --cor-primaria: #0b4f8a;        /* azul escuro: botões, links, cabeçalho */
+  --cor-primaria-escura: #083a68; /* estado :hover dos botões primários */
+  --cor-secundaria: #0f766e;      /* verde-azulado: destaques de acessibilidade */
+  --cor-destaque: #b45309;        /* laranja escuro: botão "Sou empresa / RH" */
+
+  /* ---------- Cores neutras ---------- */
+  --cor-texto: #1a202c;           /* texto principal */
+  --cor-texto-suave: #4a5568;     /* textos secundários (datas, legendas) */
+  --cor-fundo: #f5f8fb;           /* fundo geral da página */
+  --cor-superficie: #ffffff;      /* cartões, formulários, seções alternadas */
+  --cor-borda: #cbd5e0;           /* bordas discretas de cartões e campos */
+
+  /* ---------- Cores de feedback ---------- */
+  --cor-sucesso: #166534;         /* aviso de sucesso */
+  --cor-erro: #b91c1c;            /* aviso de erro */
+  --cor-foco: #ffbf00;            /* contorno amarelo visível no foco do teclado */
+
+  /* ---------- Tipografia ---------- */
+  --fonte: "Segoe UI", Verdana, Arial, sans-serif;
+  --tamanho-base: 1.0625rem;      /* 17px: leitura confortável */
+
+  /* ---------- Espaçamentos e formas ---------- */
+  --espaco-1: 0.5rem;             /* pequeno: gaps, paddings internos */
+  --espaco-2: 1rem;               /* médio: padding de containers e cartões */
+  --espaco-3: 1.5rem;             /* grande: espaçamento entre cartões */
+  --espaco-4: 2.5rem;             /* extra: padding vertical das seções */
+  --raio: 10px;                   /* arredondamento padrão de cantos */
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.1);   /* sombra leve dos cartões */
+  --largura-max: 1100px;          /* largura máxima do conteúdo centralizado */
+}

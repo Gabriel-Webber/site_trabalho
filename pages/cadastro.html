@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar - Conecta Libras</title>
+  <meta name="description" content="Escolha se você quer usar a plataforma como intérprete de Libras ou como empresa/RH.">
+  <link rel="stylesheet" href="../assets/css/variaveis.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/componentes.css">
+  <link rel="stylesheet" href="../assets/css/responsivo.css">
+</head>
+<!-- data-raiz="../" corrige os links do cabeçalho e do rodapé (montados pelo layout.js) -->
+<body data-raiz="../">
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo principal</a>
+  <!-- Preenchido pelo layout.js (sem sessão, o menu mostra só Início e Entrar) -->
+  <header class="cabecalho" id="cabecalho-site"></header>
+
+  <main id="conteudo">
+    <div class="titulo-pagina">
+      <div class="container">
+        <h1>Como você quer usar o Conecta Libras?</h1>
+        <p>Passo 1 de 2: escolha o seu perfil. No passo seguinte você cria o cadastro e só então entra no sistema.</p>
+      </div>
+    </div>
+
+    <div class="container secao">
+      <!-- Pergunta em forma de opções (controladas por js/paginas/cadastro.js).
+           Cada opção é um <label> com um rádio escondido visualmente; o CSS
+           (.opcao-perfil) desenha o cartão e destaca o escolhido. -->
+      <form id="form-acesso" class="formulario">
+        <fieldset class="campo campo--sem-borda">
+          <legend class="somente-leitor">Escolha o tipo de perfil</legend>
+          <div class="opcoes-perfil">
+            <label class="opcao-perfil">
+              <input type="radio" name="tipo" value="interprete" required>
+              <span class="opcao-perfil__icone" aria-hidden="true">🤟</span>
+              <span class="opcao-perfil__titulo">Sou intérprete de Libras</span>
+              <span class="opcao-perfil__texto">Quero criar meu perfil profissional, ver vagas, me candidatar e acompanhar o andamento.</span>
+            </label>
+            <label class="opcao-perfil">
+              <input type="radio" name="tipo" value="empresa" required>
+              <span class="opcao-perfil__icone" aria-hidden="true">🏢</span>
+              <span class="opcao-perfil__titulo">Quero criar um perfil para a empresa</span>
+              <span class="opcao-perfil__texto">Represento uma empresa ou agência de RH e quero publicar e gerenciar vagas de intérprete.</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Mensagem de erro mostrada pelo JS quando nada foi escolhido -->
+        <p id="erro-acesso" class="erro-campo" role="alert" hidden>Escolha uma das opções para continuar.</p>
+
+        <div class="grupo-botoes">
+          <button type="submit" class="botao">Continuar para o cadastro</button>
+        </div>
+      </form>
+
+      <!-- Aviso de sessão já existente: o JS preenche e mostra quando há sessão -->
+      <p id="sessao-atual" class="campo__ajuda" style="margin-top:1.5rem;" hidden></p>
+    </div>
+  </main>
+
+  <!-- Preenchido pelo layout.js -->
+  <footer class="rodape" id="rodape-site"></footer>
+
+  <!-- Scripts: a ordem importa (dados > utilitários > serviços > componentes > página).
+       layout.js precisa de sessao-servico.js carregado antes dele.
+       Esta página não carrega cadastro-servico.js: aqui só se escolhe o tipo. -->
+  <script src="../assets/js/dados/vagas-exemplo.js"></script>
+  <script src="../assets/js/utils/armazenamento.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/servicos/sessao-servico.js"></script>
+  <script src="../assets/js/componentes/layout.js"></script>
+  <script src="../assets/js/paginas/cadastro.js"></script>
+</body>
+</html>

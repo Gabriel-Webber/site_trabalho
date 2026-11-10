@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meu perfil - Conecta Libras</title>
+  <link rel="stylesheet" href="../assets/css/variaveis.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/componentes.css">
+  <link rel="stylesheet" href="../assets/css/responsivo.css">
+</head>
+<!-- data-exigir="sessao": exige um perfil escolhido, mas serve aos dois tipos.
+     O perfil.js decide qual visão mostrar (intérprete ou empresa). -->
+<body data-raiz="../" data-exigir="sessao">
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo principal</a>
+  <!-- Preenchido pelo layout.js -->
+  <header class="cabecalho" id="cabecalho-site"></header>
+
+  <main id="conteudo">
+    <div class="titulo-pagina">
+      <div class="container">
+        <h1 id="titulo-perfil">Meu perfil</h1>
+        <p id="subtitulo-perfil">Cadastro demonstrativo: os dados ficam salvos apenas neste navegador.</p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         VISÃO DO INTÉRPRETE
+         ============================================================ -->
+    <div class="container secao" id="visao-interprete" hidden>
+      <!-- Formulário à esquerda (2fr) e painel lateral à direita (1fr) -->
+      <div class="duas-colunas" style="grid-template-columns: 2fr 1fr;">
+        <!-- Formulário do intérprete (tratado por js/paginas/perfil.js).
+             Os campos com * são obrigatórios (required) e validados pelo navegador. -->
+        <section class="cartao" aria-labelledby="titulo-form">
+          <h2 id="titulo-form">Informações do intérprete</h2>
+          <form id="form-perfil" class="formulario">
+            <div class="campo">
+              <label for="nome">Nome completo *</label>
+              <input type="text" id="nome" name="nome" required autocomplete="name">
+            </div>
+            <div class="campo">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+              <p class="campo__ajuda">Se preferir, use um e-mail fictício na demonstração.</p>
+            </div>
+            <div class="campo">
+              <label for="cidade">Cidade</label>
+              <input type="text" id="cidade" name="cidade" placeholder="Ex.: Caxias do Sul - RS">
+            </div>
+            <div class="campo">
+              <label for="formacao">Formação e certificações</label>
+              <textarea id="formacao" name="formacao" placeholder="Ex.: Graduação em Letras-Libras; certificação Prolibras"></textarea>
+            </div>
+            <div class="campo">
+              <label for="experiencia">Experiência</label>
+              <textarea id="experiencia" name="experiencia" placeholder="Onde e em quais situações você já atuou como intérprete"></textarea>
+            </div>
+            <div class="campo">
+              <label for="habilidades">Idiomas e outras habilidades</label>
+              <input type="text" id="habilidades" name="habilidades" placeholder="Ex.: Libras, português, inglês, Libras tátil">
+            </div>
+            <fieldset class="campo">
+              <legend>Especialidades de interpretação</legend>
+              <!-- Checkboxes criados por App.Helpers.renderizarCheckboxesEspecialidades,
+                   já marcando as especialidades do perfil salvo -->
+              <div id="perfil-especialidades"></div>
+            </fieldset>
+            <div class="campo">
+              <label for="videoLibras">Link do vídeo de apresentação em Libras</label>
+              <input type="url" id="videoLibras" name="videoLibras" placeholder="https://...">
+              <p class="campo__ajuda">Cole o link de um vídeo (YouTube, Drive etc.) em que você se apresenta. Opcional.</p>
+            </div>
+            <div class="grupo-botoes">
+              <button type="submit" class="botao">Salvar perfil</button>
+              <!-- Só aparece quando já existe perfil salvo -->
+              <button type="button" class="botao botao--perigo" id="excluir-perfil" hidden>Excluir perfil</button>
+            </div>
+          </form>
+        </section>
+
+        <aside>
+          <!-- Espaço reservado para vídeo de apoio em Libras, com transcrição em texto -->
+          <div class="video-libras" style="margin-bottom:1.5rem;">
+            <div class="video-libras__tela" role="img" aria-label="Espaço reservado para vídeo em Libras">Vídeo em Libras: como montar seu perfil</div>
+            <details>
+              <summary>Ler transcrição</summary>
+              <p>Descreva suas áreas de atuação, certificações e disponibilidade de horários. No vídeo, apresente-se em Libras em até 2 minutos.</p>
+            </details>
+          </div>
+
+          <!-- Resumo das candidaturas, preenchido pelo perfil.js -->
+          <section class="cartao" aria-labelledby="titulo-minhas">
+            <h2 id="titulo-minhas">Minhas candidaturas</h2>
+            <div id="resumo-candidaturas"></div>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         VISÃO DA EMPRESA / RH
+         ============================================================ -->
+    <div class="container secao" id="visao-empresa" hidden>
+      <div class="duas-colunas" style="grid-template-columns: 2fr 1fr;">
+        <section class="cartao" aria-labelledby="titulo-empresa">
+          <h2 id="titulo-empresa">Dados da empresa ou agência de RH</h2>
+          <form id="form-empresa" class="formulario">
+            <div class="campo">
+              <label for="emp-nome">Nome da empresa *</label>
+              <input type="text" id="emp-nome" name="nome" required>
+            </div>
+            <div class="campo">
+              <label for="emp-cnpj">CNPJ (fictício)</label>
+              <input type="text" id="emp-cnpj" name="cnpj" placeholder="00.000.000/0000-00">
+            </div>
+            <div class="campo">
+              <label for="emp-cidade">Cidade</label>
+              <input type="text" id="emp-cidade" name="cidade" placeholder="Ex.: Bento Gonçalves - RS">
+            </div>
+            <div class="campo">
+              <label for="emp-descricao">Sobre a empresa</label>
+              <textarea id="emp-descricao" name="descricao"></textarea>
+            </div>
+            <fieldset class="campo">
+              <legend>Áreas em que a empresa precisa de intérpretes</legend>
+              <!-- Checkboxes criados por App.Helpers.renderizarCheckboxesEspecialidades -->
+              <div id="empresa-especialidades"></div>
+            </fieldset>
+            <div class="grupo-botoes">
+              <button type="submit" class="botao botao--empresa">Salvar empresa</button>
+              <!-- Só aparece quando já existe cadastro salvo -->
+              <button type="button" class="botao botao--perigo" id="excluir-empresa" hidden>Excluir cadastro</button>
+            </div>
+          </form>
+        </section>
+
+        <aside>
+          <!-- Resumo das vagas publicadas, preenchido pelo perfil.js -->
+          <section class="cartao" aria-labelledby="titulo-vagas-empresa">
+            <h2 id="titulo-vagas-empresa">Minhas vagas</h2>
+            <div id="resumo-vagas"></div>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Preenchido pelo layout.js -->
+  <footer class="rodape" id="rodape-site"></footer>
+
+  <!-- Scripts: a ordem importa (dados > utilitários > serviços > componentes > página).
+       Esta página carrega os serviços dos dois perfis porque mostra
+       a visão do intérprete ou a da empresa, conforme a sessão. -->
+  <script src="../assets/js/dados/vagas-exemplo.js"></script>
+  <script src="../assets/js/utils/armazenamento.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/servicos/sessao-servico.js"></script>
+  <script src="../assets/js/servicos/vagas-servico.js"></script>
+  <script src="../assets/js/servicos/candidatura-servico.js"></script>
+  <script src="../assets/js/servicos/cadastro-servico.js"></script>
+  <script src="../assets/js/componentes/layout.js"></script>
+  <script src="../assets/js/paginas/perfil.js"></script>
+</body>
+</html>

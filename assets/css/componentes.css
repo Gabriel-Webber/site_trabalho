@@ -1,0 +1,196 @@
+/* ==========================================================
+   componentes.css
+   Peças reutilizáveis: botões, cartões, formulários, selos,
+   modal, avisos, vídeo em Libras e tabela de status.
+
+   A convenção de nomes é BEM simplificado:
+   .bloco            -> o componente (ex.: .cartao)
+   .bloco__parte     -> um pedaço interno (ex.: .cartao__empresa)
+   .bloco--variante  -> uma variação (ex.: .botao--secundario)
+   ========================================================== */
+
+/* ---------- Botões ----------
+   Usado tanto em <button> quanto em <a class="botao">, por isso
+   display: inline-block e text-decoration: none. */
+.botao {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border: 2px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  background: var(--cor-primaria);
+  color: #fff;
+  font: inherit;              /* herda fonte e tamanho do elemento pai */
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.botao:hover { background: var(--cor-primaria-escura); }
+/* Variante clara: fundo branco com texto azul (ações secundárias). */
+.botao--secundario { background: #fff; color: var(--cor-primaria); }
+.botao--secundario:hover { background: #e6f0fa; }
+/* Variante laranja: usada só no botão "Sou empresa / RH". */
+.botao--empresa { background: var(--cor-destaque); border-color: var(--cor-destaque); }
+.botao--empresa:hover { background: #92400e; }
+/* Variante de perigo: ações destrutivas (excluir vaga, excluir perfil). */
+.botao--perigo { background: var(--cor-erro); border-color: var(--cor-erro); }
+.botao--perigo:hover { background: #7f1d1d; }
+/* Botão "Sair" do cabeçalho: fundo transparente sobre o azul do cabeçalho. */
+.botao--sair { background: transparent; color: #fff; border-color: #fff; padding: 0.45rem 1rem; }
+.botao--sair:hover { background: #fff; color: var(--cor-primaria); }
+/* Botão desabilitado: cinza e cursor de "proibido". */
+.botao:disabled { background: #718096; border-color: #718096; cursor: not-allowed; }
+/* Agrupa botões lado a lado, quebrando linha quando faltar espaço. */
+.grupo-botoes { display: flex; flex-wrap: wrap; gap: var(--espaco-1); }
+
+/* ---------- Cartões ---------- */
+.cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: var(--espaco-3);
+}
+.cartao h3 { margin-bottom: 0.25rem; }
+.cartao__empresa { color: var(--cor-texto-suave); margin-bottom: var(--espaco-1); }
+.cartao__meta { font-size: 0.95rem; margin-bottom: var(--espaco-1); }
+
+/* ---------- Selos (etiquetas) ----------
+   "Pílulas" com modalidade, contrato e especialidades da vaga. */
+.selos { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0 0 var(--espaco-2); }
+.selo {
+  background: #e6fffa;
+  color: #0b4f4a;
+  border: 1px solid var(--cor-secundaria);
+  border-radius: 999px;       /* valor alto = cantos totalmente arredondados */
+  padding: 0.1rem 0.7rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+/* Selo azul: diferencia modalidade e contrato das especialidades. */
+.selo--modalidade { background: #ebf4ff; color: var(--cor-primaria); border-color: var(--cor-primaria); }
+/* Selos de situação da vaga publicada pela empresa. */
+.selo--aberta { background: #e6fffa; color: var(--cor-sucesso); border-color: var(--cor-sucesso); }
+.selo--encerrada { background: #e2e8f0; color: #2d3748; border-color: #718096; }
+
+/* ---------- Escolha de perfil (tela de cadastro) ----------
+   Cada opção é um <label> com um rádio escondido visualmente: o cartão
+   inteiro vira a área clicável. :has(input:checked) destaca a escolhida. */
+.opcoes-perfil { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-2); }
+.opcao-perfil {
+  display: grid;
+  gap: 0.4rem;
+  padding: var(--espaco-3);
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  cursor: pointer;
+}
+.opcao-perfil:hover { border-color: var(--cor-primaria); }
+/* O rádio continua no HTML (para teclado e leitor de tela), mas fica
+   invisível; o foco do teclado é mostrado no cartão inteiro. */
+.opcao-perfil input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.opcao-perfil:has(input:focus-visible) { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
+.opcao-perfil:has(input:checked) { border-color: var(--cor-primaria); box-shadow: 0 0 0 3px #cfe3f7; }
+.opcao-perfil__icone { font-size: 2rem; line-height: 1; }
+.opcao-perfil__titulo { font-weight: 700; font-size: 1.1rem; }
+.opcao-perfil__texto { color: var(--cor-texto-suave); }
+
+/* ---------- Formulários ---------- */
+.formulario { display: grid; gap: var(--espaco-2); }   /* um campo por linha, com espaçamento */
+.campo label, .campo legend { display: block; font-weight: 700; margin-bottom: 0.25rem; }
+/* Campos de texto, select e textarea compartilham o mesmo visual. */
+.campo input[type="text"], .campo input[type="email"], .campo input[type="url"],
+.campo input[type="search"], .campo select, .campo textarea {
+  width: 100%;
+  padding: 0.65rem;
+  font: inherit;
+  border: 2px solid #718096;   /* borda escura: contraste mínimo 3:1 */
+  border-radius: var(--raio);
+  background: #fff;
+}
+.campo textarea { min-height: 110px; resize: vertical; }   /* só cresce na vertical */
+.campo__ajuda { font-size: 0.9rem; color: var(--cor-texto-suave); margin: 0.25rem 0 0; }
+/* fieldset usado como "campo" (grupo de checkboxes com legend). */
+fieldset.campo { border: 1px solid var(--cor-borda); border-radius: var(--raio); padding: var(--espaco-2); margin: 0; }
+/* fieldset sem moldura: usado na pergunta de perfil da tela de cadastro. */
+fieldset.campo--sem-borda { border: none; padding: 0; }
+/* Cada opção: checkbox e texto alinhados na mesma linha. */
+.opcao { display: flex; align-items: center; gap: 0.5rem; padding: 0.2rem 0; }
+.opcao input { width: 1.2rem; height: 1.2rem; }   /* checkbox maior, mais fácil de clicar */
+.erro-campo { color: var(--cor-erro); font-weight: 600; margin: 0.25rem 0 0; }
+
+/* Barra de busca da página inicial */
+.busca { display: flex; flex-wrap: wrap; gap: var(--espaco-1); }
+.busca input { flex: 1 1 220px; padding: 0.8rem; font: inherit; border: 2px solid #fff; border-radius: var(--raio); }
+
+/* Painel de filtros da página de vagas: acompanha a rolagem no desktop. */
+.painel-filtros { position: sticky; top: var(--espaco-1); }
+
+/* ---------- Aviso (toast) ----------
+   Mensagem temporária criada por App.Helpers.mostrarAviso(). */
+.aviso {
+  position: fixed;
+  bottom: var(--espaco-3);
+  left: 50%;
+  transform: translateX(-50%);   /* centraliza de fato (left: 50% sozinho não centraliza) */
+  background: var(--cor-sucesso);
+  color: #fff;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--raio);
+  font-weight: 700;
+  z-index: 200;                  /* acima do modal e do cabeçalho */
+  max-width: 90%;
+}
+.aviso--erro { background: var(--cor-erro); }
+
+/* ---------- Modal de detalhes (<dialog>) ----------
+   min(680px, 94vw): no máximo 680px, mas nunca mais que 94% da tela. */
+dialog.modal {
+  width: min(680px, 94vw);
+  border: none;
+  border-radius: var(--raio);
+  padding: var(--espaco-3);
+}
+/* ::backdrop é o fundo escurecido atrás do <dialog> aberto. */
+dialog.modal::backdrop { background: rgba(0, 0, 0, 0.6); }
+
+/* ---------- Vídeo em Libras (espaço reservado) ---------- */
+.video-libras {
+  background: #1a202c;
+  color: #fff;
+  border-radius: var(--raio);
+  padding: var(--espaco-3);
+  text-align: center;
+}
+/* "Tela" do vídeo: moldura tracejada com o texto centralizado. */
+.video-libras__tela {
+  background: #2d3748;
+  border: 2px dashed #a0aec0;
+  border-radius: var(--raio);
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--espaco-2);
+  font-size: 1.1rem;
+}
+/* A transcrição (<details>) volta a ser alinhada à esquerda para leitura. */
+.video-libras details { text-align: left; }
+.video-libras summary { cursor: pointer; font-weight: 700; }
+
+/* ---------- Status das candidaturas ----------
+   Uma cor por etapa; a classe vem de "status--" + id da etapa. */
+.status { display: inline-block; padding: 0.15rem 0.8rem; border-radius: 999px; font-weight: 700; font-size: 0.9rem; }
+.status--enviada { background: #ebf4ff; color: #1e40af; }
+.status--analise { background: #fefcbf; color: #744210; }
+.status--entrevista { background: #e6fffa; color: #0b4f4a; }
+.status--finalizada { background: #e2e8f0; color: #2d3748; }
+
+/* Linha do tempo simples que mostra em qual etapa a candidatura está. */
+.etapas { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: var(--espaco-1) 0; font-size: 0.85rem; }
+.etapas li { padding: 0.1rem 0.6rem; border: 1px solid var(--cor-borda); border-radius: 999px; color: var(--cor-texto-suave); }
+/* Etapa atual: fundo azul e texto branco (marcada com aria-current="step" no JS). */
+.etapas li.ativa { background: var(--cor-primaria); color: #fff; border-color: var(--cor-primaria); font-weight: 700; }
+
+/* Mensagem de lista vazia ("nenhuma vaga encontrada", "nenhuma candidatura"...). */
+.vazio { text-align: center; padding: var(--espaco-4) var(--espaco-2); color: var(--cor-texto-suave); }

@@ -1,0 +1,76 @@
+/* ==========================================================
+   layout.css
+   Estrutura da página: cabeçalho, menu, seções, grades, rodapé.
+   Aqui ficam as "caixas grandes"; as peças pequenas (botões,
+   cartões, formulários) estão em componentes.css.
+   ========================================================== */
+
+/* ---------- Cabeçalho e menu ---------- */
+.cabecalho {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+/* Linha interna: logo à esquerda, menu à direita. */
+.cabecalho__interno {
+  display: flex;
+  flex-wrap: wrap;           /* quebra de linha em telas pequenas */
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding-top: var(--espaco-2);
+  padding-bottom: var(--espaco-2);
+}
+.logo {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+/* Menu: lista horizontal sem marcadores. */
+.menu { display: flex; flex-wrap: wrap; gap: var(--espaco-1); list-style: none; margin: 0; padding: 0; }
+.menu a {
+  display: block;            /* aumenta a área clicável (padding funciona melhor) */
+  color: #fff;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--raio);
+  text-decoration: none;
+  font-weight: 600;
+}
+.menu a:hover { background: var(--cor-primaria-escura); }
+/* Página atual (marcada via aria-current pelo layout.js):
+   fundo branco + texto azul invertem o contraste do item. */
+.menu a[aria-current="page"] { background: #fff; color: var(--cor-primaria); }
+
+/* ---------- Seções ---------- */
+.secao { padding: var(--espaco-4) 0; }
+.secao--alt { background: var(--cor-superficie); }   /* fundo branco para alternar blocos */
+.secao__titulo { text-align: center; margin-bottom: var(--espaco-3); }
+
+/* Faixa de título das páginas internas (vagas, perfil, empresa...) */
+.titulo-pagina { background: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: var(--espaco-3) 0; }
+.titulo-pagina h1 { margin: 0 0 0.25rem; }
+.titulo-pagina p { margin: 0; color: var(--cor-texto-suave); }
+
+/* ---------- Banner (herói) da página inicial ----------
+   Degradê diagonal do azul principal para o verde-azulado. */
+.heroi {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+  color: #fff;
+  padding: var(--espaco-4) 0;
+}
+/* Duas colunas: texto um pouco mais largo (1.2fr) que o vídeo (1fr). */
+.heroi__grade { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--espaco-3); align-items: center; }
+.heroi h1 { font-size: 2.3rem; }
+
+/* ---------- Grades ----------
+   auto-fill cria quantas colunas couberem, com mínimo de 280px cada;
+   1fr faz todas dividirem o espaço restante igualmente. */
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--espaco-3); }
+/* Duas colunas iguais (formulário + painel lateral).
+   align-items: start evita que as colunas fiquem com a mesma altura. */
+.duas-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-3); align-items: start; }
+
+/* ---------- Rodapé ---------- */
+.rodape { background: #1a202c; color: #e2e8f0; padding: var(--espaco-3) 0; margin-top: var(--espaco-4); }
+.rodape a { color: #fff; }
+.rodape p { margin: 0 0 0.5rem; }

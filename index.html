@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- lang="pt-BR" ajuda leitores de tela a usar a pronúncia correta -->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport: faz o layout se adaptar a celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conecta Libras - Empresas e intérpretes de Libras</title>
+  <!-- description: texto que buscadores e compartilhamentos exibem -->
+  <meta name="description" content="Plataforma que conecta empresas e agências de RH a intérpretes de Libras.">
+  <!-- Ordem dos CSS: variáveis > base > layout > componentes > responsivo.
+       O responsivo vem por último para poder sobrescrever as regras anteriores. -->
+  <link rel="stylesheet" href="assets/css/variaveis.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/componentes.css">
+  <link rel="stylesheet" href="assets/css/responsivo.css">
+</head>
+<!-- data-raiz: prefixo dos caminhos usado pelo layout.js.
+     Aqui é "" porque o index.html fica na raiz; nas páginas de pages/ é "../". -->
+<body data-raiz="">
+  <!-- Primeiro elemento focável da página: permite pular o menu com Tab -->
+  <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo principal</a>
+
+  <!-- Cabeçalho vazio: o layout.js preenche com logo e menu ao carregar -->
+  <header class="cabecalho" id="cabecalho-site"></header>
+
+  <main id="conteudo">
+    <!-- Banner de apresentação: título, busca e atalhos para os dois públicos.
+         O home.js esconde a busca e os atalhos para quem é empresa. -->
+    <section class="heroi" aria-labelledby="titulo-heroi">
+      <div class="container heroi__grade">
+        <div>
+          <h1 id="titulo-heroi">Conectamos empresas e intérpretes de Libras</h1>
+          <p id="texto-heroi">Sua empresa ou agência de RH vai contratar uma pessoa surda? Publique a vaga de intérprete e encontre profissionais de Libras. Você é intérprete? Encontre oportunidades na Serra Gaúcha.</p>
+
+          <!-- Busca: tratada por js/paginas/home.js, que redireciona para
+               vagas.html?busca=texto (não há servidor para receber o formulário).
+               Só aparece para o intérprete. -->
+          <form id="form-busca" class="busca" role="search" aria-label="Pesquisar vagas">
+            <!-- Label invisível na tela, mas lida por leitores de tela -->
+            <label for="campo-busca" class="somente-leitor">Título ou empresa</label>
+            <input type="search" id="campo-busca" placeholder="Título ou empresa. Ex.: reuniões">
+            <button type="submit" class="botao botao--secundario">Pesquisar vagas</button>
+          </form>
+
+          <!-- Atalhos: só aparecem para quem ainda não escolheu um perfil.
+               Com sessão, o menu do topo já leva a cada área. -->
+          <div class="grupo-botoes" id="atalhos-heroi" style="margin-top: 1rem;">
+            <a class="botao botao--secundario" href="pages/cadastro.html">Sou intérprete</a>
+            <a class="botao botao--empresa" href="pages/cadastro.html">Sou empresa / RH</a>
+          </div>
+        </div>
+
+        <!-- Espaço reservado para vídeo explicativo em Libras.
+             O <details> oferece a transcrição em texto para quem não vê o vídeo. -->
+        <div class="video-libras">
+          <div class="video-libras__tela" role="img" aria-label="Espaço reservado para o vídeo explicativo em Libras">
+            Vídeo em Libras: como a plataforma funciona
+          </div>
+          <details>
+            <summary>Ler transcrição e legenda do vídeo</summary>
+            <p>Olá! Empresas e agências de RH publicam vagas de intérprete de Libras. Intérpretes criam o perfil, se candidatam e acompanham o andamento.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demandas em destaque: o home.js insere os cartões neste div vazio,
+         usando os ids de App.VAGAS_DESTAQUE. Para a empresa, o título e o
+         link mudam para "Minhas vagas publicadas". -->
+    <section class="secao" aria-labelledby="titulo-destaques">
+      <div class="container">
+        <h2 id="titulo-destaques" class="secao__titulo">Demandas em destaque</h2>
+        <div class="grade" id="lista-destaques"></div>
+        <p style="text-align:center; margin-top:1.5rem;"><a class="botao" id="link-destaques" href="pages/vagas.html">Ver todas as vagas</a></p>
+      </div>
+    </section>
+
+    <!-- Explicação do fluxo (RH -> intérpretes -> inclusão) e base legal -->
+    <section class="secao secao--alt" aria-labelledby="titulo-inclusao">
+      <div class="container">
+        <h2 id="titulo-inclusao" class="secao__titulo">Como funciona</h2>
+        <div class="grade">
+          <article class="cartao">
+            <h3>RH recebe a demanda</h3>
+            <p>Uma empresa cliente tem vaga para pessoa surda. O RH publica aqui a necessidade de intérprete, com contrato, local e especialidade.</p>
+          </article>
+          <article class="cartao">
+            <h3>Intérpretes se candidatam</h3>
+            <p>Profissionais de Libras mostram formação, especialidades e vídeo de apresentação, e acompanham cada candidatura.</p>
+          </article>
+          <article class="cartao">
+            <h3>Inclusão que funciona</h3>
+            <p>Com o intérprete na equipe, a vaga de fato se torna acessível. A Lei de Cotas (8.213/91) e a Lei Brasileira de Inclusão (13.146/15) garantem oportunidades para pessoas com deficiência.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé vazio: o layout.js preenche com a identificação do projeto -->
+  <footer class="rodape" id="rodape-site"></footer>
+
+  <!-- Scripts: a ordem importa (dados > utilitários > serviços > componentes > página).
+       1) dados/vagas-exemplo.js cria o objeto global App e as listas fixas;
+       2) utils/ e servicos/ adicionam funções a App (sessao-servico.js antes de layout.js);
+       3) componentes/ monta cabeçalho, rodapé e cartões;
+       4) paginas/home.js usa tudo isso para montar esta página. -->
+  <script src="assets/js/dados/vagas-exemplo.js"></script>
+  <script src="assets/js/utils/armazenamento.js"></script>
+  <script src="assets/js/utils/helpers.js"></script>
+  <script src="assets/js/servicos/sessao-servico.js"></script>
+  <script src="assets/js/servicos/vagas-servico.js"></script>
+  <script src="assets/js/servicos/candidatura-servico.js"></script>
+  <script src="assets/js/servicos/cadastro-servico.js"></script>
+  <script src="assets/js/componentes/layout.js"></script>
+  <script src="assets/js/componentes/cartao-vaga.js"></script>
+  <script src="assets/js/paginas/home.js"></script>
+</body>
+</html>

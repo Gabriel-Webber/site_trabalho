@@ -1,0 +1,86 @@
+/* ==========================================================
+   base.css
+   Reset simples, tipografia, foco visível e utilitários.
+
+   Este arquivo define o "padrão" de todos os elementos HTML.
+   Os arquivos seguintes (layout, componentes) sobrescrevem
+   esses padrões quando necessário.
+   ========================================================== */
+
+/* Faz width/height incluírem padding e borda (cálculo mais intuitivo).
+   O seletor universal cobre também os pseudo-elementos ::before e ::after. */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ---------- Corpo da página ---------- */
+body {
+  margin: 0;                       /* remove a margem padrão do navegador */
+  font-family: var(--fonte);
+  font-size: var(--tamanho-base);
+  line-height: 1.6;                /* espaçamento entre linhas confortável para leitura */
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+/* ---------- Títulos e parágrafos ---------- */
+h1, h2, h3 { line-height: 1.25; margin: 0 0 var(--espaco-2); }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+p  { margin: 0 0 var(--espaco-2); }
+img { max-width: 100%; }           /* imagens nunca ultrapassam o container */
+
+/* ---------- Links ---------- */
+a { color: var(--cor-primaria); }
+/* No hover, o sublinhado fica mais grosso: pista visual além da cor
+   (importante para quem não distingue cores). */
+a:hover { text-decoration-thickness: 3px; }
+
+/* ---------- Foco visível ----------
+   Essencial para quem navega por teclado (WCAG 2.4.7).
+   :focus-visible aplica o contorno apenas quando o foco vem do teclado,
+   evitando o "anel" ao clicar com o mouse. */
+:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #000;      /* halo preto garante contraste em qualquer fundo */
+}
+
+/* ---------- Link "Ir para o conteúdo" ----------
+   Fica fora da tela (left: -999px) e só aparece quando recebe foco
+   via Tab, permitindo pular o menu e ir direto ao conteúdo. */
+.pular-conteudo {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: #000;
+  color: #fff;
+  padding: var(--espaco-1) var(--espaco-2);
+  z-index: 100;                    /* acima do cabeçalho */
+}
+.pular-conteudo:focus { left: 0; }
+
+/* ---------- Container central ----------
+   Limita a largura do conteúdo e centraliza com margin: 0 auto. */
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0 var(--espaco-2);
+}
+
+/* ---------- Texto visível apenas para leitores de tela ----------
+   Mantém o texto no HTML (para ser lido pelo leitor de tela) mas
+   o reduz a 1px e o esconde visualmente. */
+.somente-leitor {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Movimento reduzido ----------
+   Respeita quem pede menos animação no sistema operacional. */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
