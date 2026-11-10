@@ -112,7 +112,7 @@ App.Layout = (function () {
   function montarRodape(raiz) {
     document.getElementById("rodape-site").innerHTML =
       '<div class="container">' +
-        "<p><strong>Conecta Libras</strong> - projeto acadêmico do curso Técnico em Desenvolvimento de Sistemas (Senac).</p>" +
+        "<p><strong>Elo Libras</strong> - projeto acadêmico do curso Técnico em Desenvolvimento de Sistemas (Senac).</p>" +
         "<p>Plataforma que conecta empresas e intérpretes de Libras. Protótipo com dados fictícios. Nenhuma informação é enviada a servidores: tudo fica salvo no seu navegador.</p>" +
         '<p><a href="' + raiz + 'pages/cadastro.html">Trocar de perfil</a></p>' +
       "</div>";

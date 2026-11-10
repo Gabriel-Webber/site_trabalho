@@ -1,4 +1,4 @@
-# Conecta Libras - Marketplace de Intérpretes de Libras para Empresas
+# Elo Libras - Marketplace de Intérpretes de Libras para Empresas
 
 ## 1. Contexto do projeto
 
